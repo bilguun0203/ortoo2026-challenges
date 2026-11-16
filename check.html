@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="mn">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>ÖRTÖÖ 2026 - шалгах хуудас</title>
+        <style>
+            :root {
+                --bg: #fafafa;
+                --fg: #1a1a1a;
+                --card: #fff;
+                --bd: #d8d8d8;
+                --mut: #666;
+                --ok: #15803d;
+                --no: #b91c1c;
+                --ac: #2563eb;
+            }
+            @media (prefers-color-scheme: dark) {
+                :root {
+                    --bg: #121212;
+                    --fg: #eee;
+                    --card: #1c1c1c;
+                    --bd: #333;
+                    --mut: #999;
+                    --ok: #4ade80;
+                    --no: #f87171;
+                    --ac: #60a5fa;
+                }
+            }
+            * {
+                box-sizing: border-box;
+            }
+            body {
+                margin: 0;
+                background: var(--bg);
+                color: var(--fg);
+                font:
+                    16px/1.5 system-ui,
+                    sans-serif;
+            }
+            main {
+                max-width: 640px;
+                margin: 0 auto;
+                padding: 16px;
+            }
+            h1 {
+                font-size: 1.4rem;
+            }
+            h2 {
+                font-size: 1.1rem;
+                margin: 0 0 8px;
+            }
+            section {
+                background: var(--card);
+                border: 1px solid var(--bd);
+                border-radius: 8px;
+                padding: 12px 16px;
+                margin: 12px 0;
+            }
+            .f {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 6px;
+                align-items: center;
+                margin: 8px 0;
+            }
+            .f label {
+                flex: 1 0 100%;
+                font-size: 0.9rem;
+                color: var(--mut);
+            }
+            .f input {
+                flex: 1 1 160px;
+                min-width: 0;
+                padding: 8px;
+                font: inherit;
+                color: inherit;
+                background: var(--bg);
+                border: 1px solid var(--bd);
+                border-radius: 6px;
+            }
+            button,
+            a.b {
+                padding: 8px 12px;
+                font: inherit;
+                color: inherit;
+                background: var(--bg);
+                border: 1px solid var(--bd);
+                border-radius: 6px;
+                cursor: pointer;
+                text-decoration: none;
+                display: inline-block;
+            }
+            .r {
+                width: 1.5em;
+                font-weight: bold;
+            }
+            .r.y {
+                color: var(--ok);
+            }
+            .r.n {
+                color: var(--no);
+            }
+            .f.done input {
+                border-color: var(--ok);
+            }
+            .h {
+                margin: 8px 0;
+                font-size: 0.95rem;
+            }
+            .h p {
+                margin: 4px 0;
+            }
+            code {
+                background: var(--bg);
+                padding: 0 3px;
+                border-radius: 3px;
+            }
+            .mut {
+                color: var(--mut);
+                font-size: 0.9rem;
+            }
+        </style>
+    </head>
+    <body>
+        <main>
+            <h1>ÖRTÖÖ 2026: шалгах хуудас</h1>
+            <p class="mut">
+                Энэхүү шалгах хуудсыг ашиглан хариултын файлыг харахгүйгээр таны олсон мэдээлэл зөв эсэхийг шалгах боломжтой.
+                Хариултаа оруулаад шалгахад ✓ / ✗ тэмдэгт гарна. Мөн сэжүүр бүр нэг нэгээрээ нээгдэнэ.
+                <span style="font-style:italic;">Жич: Таны оруулсан хариулт, нээсэн сэжүүр local storage дотор хадгалагдана.</span>
+            </p>
+            <div id="app"></div>
+        </main>
+        <script>
+            var HASH = {
+                    decode: {
+                        answer: "b6d911ca5e4aa56df8ba1b82b004d80ae1ad4d0f522c140b9757d788606dfbb2",
+                        label: "f7a3147e47332fa42690c70fb7eed5c7cd0f2d7fbe9ce81f1e37b0f14491d323",
+                        envelope:
+                            "b8d9bdf6adecc293a1437b40318f08b2bff579bf66d53790125381f05e7bf191",
+                    },
+                    logs: {
+                        page: "0f8ef3377b30fc47f96b48247f463a726a802f62f3faa03d56403751d2f66c67",
+                        user: "9c638ae477f0c24097f239b1e7ef09151a7111e9c13894eb930af7491bb28aad",
+                        ip: "43802392d4b552b9fb962f917ea7dc000435a69cc4ab70fe358699fd3e3d711c",
+                        time: "eb1e198b308c7aba785be3ec24308fd9b66dd4228ed6647dd096e45e3ad45418",
+                    },
+                    signal: {
+                        spectrogram:
+                            "205527f2bd6f4ff3f74c09ad1445b4f0f4bd02cee81649e2830c4a605a2c7bc7",
+                        morse: "34b62ba40d8c5d03ebfe80b5b0f86646cc09e0ecd69291095ecf12ac900530c2",
+                        comment:
+                            "4a111b2c9d948d6315c8b1aa4fdaddb4afc6504723b9caa03b9b5dee9ada00fd",
+                    },
+                    bonus: {
+                        bonus: "7d662863fb2d55cb3ca09e479b8823c6a80fc73c94888395c866193dd29e8d88",
+                    },
+                },
+                HINTS = {
+                    decode: [
+                        "Тоо бүр нэг мэдэгдэж буй зүйлийн үсэгтэй харгалзах юм болов уу?",
+                        "Кодын тайлбар үгийн эхний үсгийг ажигла (`404 Not Found` → N). Гарсан текст нь юу вэ? Дахиад нэг шифр? Цагаан толгойг шилжүүлсэн байж магад.",
+                        "Сүүлийн мөр ENVELOPE гэж эхэлнэ. Тэр мөрийн эхний үсгийг E-тэй харьцуулж шилжилтийн тоог ол, бүх үсгийг тэр тоогоор буцааж шилжүүл. Сүүлийн мөрийн 3 үсэг бол захидлын шошго.",
+                    ],
+                    logs: [
+                        "Нэг системийн хоёр log файл байна. Нэгэн зарлал (`/announcement/...`) гэнэт алга болсон байна. HTTP status нь өөрчлөгдсөн зарлалыг ол.",
+                        "Энэ CMS устгах үйлдлийг `DELETE` биш, `POST /admin/announcements/<дугаар>` хүсэлтээр илгээдэг. Засварлах үйлдэл мөн ижил POST хүсэлтийн бүртгэл үлдээнэ. Хуудас хэзээ 404 болж эхэлснийг хар.",
+                        "404 болсон зарлалын анхны 404-ийн өмнөх хамгийн сүүлийн `POST /admin/announcements/<дугаар>` мөр бол устгасан хүсэлт. Хэрэгтэй мэдээллүүд энэ мөрөөс гарах ба `auth.log`-оос тэр тухайн хүсэлттэй холбоотой, хамгийн сүүлд `LOGIN_OK` хийсэн хэрэглэгчийг ол; `SSO_LOGIN` ч мөн адил хүнийг заана.",
+                    ],
+                    signal: [
+                        "Сонсохоос гадна дууг нүдээр хар, файлыг нь ч мөн шинжил. Гурван нууц үг гурван өөр аргаар нуугдсан.",
+                        "Audacity-д track menu (⋯)-ээс Spectrogram харагдац руу шилж, дээд давтамжийг хамгийн их болго. Файл хоёр сувагтай магадгүй нийлээд өөр зүйл болох ч юм бил үү?",
+                        "Нууц үг 1: файлыг нэг сувагтай буюу моно болгож экспорт хийгээд гарсан файлаа дахин нээхэд спектрограм дээр юу харагдах бол? Нууц үг 2: ...---... ...---... Морз уу?, Нэг нь латин үсгээр бичсэн монгол үг; Нөгөө нь төөрөгдүүлэх зорилгоор нэмсэн хуурамч дохио. Нууц үг 3: Metadata дотор юм байгаа юм болов уу? Файлын `LIST/INFO` хэсгийн `ICMT` (comment) талбар. Текст засварлагч эсвэл Audacity дотор metadata editor.",
+                    ],
+                    glitch: [
+                        "Зөвхөн харах биш, туршиж үз: товч дар, талбарыг хоосон эсвэл буруу бөглө, нэг үйлдлийг хоёр удаа хий, хуудсаа дахин ачаал.",
+                        "Ангилал бүрээс санаа ав: тооцоолол (GPA, кредит), хандах эрх (өөр хүний мэдээлэл, админ үйлдэл), шалгалт (хоосон талбар, таарахгүй нууц үг), хуудаслалт, хайлт, файл. Алдааг үр дүн нь буруу харагдаж буй элемент дээр нь мэдээл.",
+                        "Хүнд алдааны хоёр жишээ: цаг давхцсан хоёр хичээлд зэрэг бүртгүүлж үз; голч дүнг (GPA) кредитээр жигнэж өөрөө бодоод портал дээрхтэй харьцуул. Үр дүн нь буруу гарсан элемент дээр нь мэдээл.",
+                    ],
+                    relay: [
+                        "Хамгийн олон хөрштэй өртөөнөөс эхэл. Өртөө бүрт хөршүүдтэйгээ хамгийн бага зөрчих сувгийг өг. Зургаас илүү `graph.txt` жагсаалт найдвартай.",
+                        "Бүгд хоорондоо замаар холбогдсон 4 өртөө 3 сувагт заавал 1 зөрчил үүсгэнэ: тэднийг 2+1+1 болгож хуваа.",
+                        "Цөөн зөрчил дээр гацсан бол нэг өртөөг дахин будаад сайжрахгүй. Хэсэг бүлэг өртөөний будгийг арилгаж, өөр сонголтоор дахин буд. `graph.txt`-г уншдаг богино программ (санамсаргүй эхлэлээс олон удаа сайжруулах) үүнийг хурдан хийнэ.",
+                    ],
+                },
+                SECS = [
+                    [
+                        "decode",
+                        "1. Decode",
+                        [
+                            ["answer", "Тайлсан зурвас"],
+                            ["label", "Захидлын шошго"],
+                            ["envelope", "Захидлын код"],
+                        ],
+                    ],
+                    [
+                        "logs",
+                        "2. Logs",
+                        [
+                            ["page", "Зарлалын дугаар"],
+                            ["user", "Хэрэглэгчийн нэр"],
+                            ["ip", "IP хаяг"],
+                            ["time", "Цаг"],
+                        ],
+                    ],
+                    [
+                        "signal",
+                        "3. Signal",
+                        [
+                            ["spectrogram", "Нууц үг 1"],
+                            ["morse", "Нууц үг 2"],
+                            ["comment", "Нууц үг 3"],
+                        ],
+                    ],
+                    ["glitch", "4. Glitch", [], "glitch/", "Портал нээх"],
+                    [
+                        "relay",
+                        "5. Relay",
+                        [],
+                        "relay.html",
+                        "Будах хуудас нээх",
+                    ],
+                    ["bonus", "7. Бонус", [["bonus", "???"]]],
+                ];
+
+            // Same as challenges/common.py normalize: NFKC, trim, drop whitespace, uppercase.
+            function normalize(s) {
+                return s
+                    .normalize("NFKC")
+                    .trim()
+                    .replace(/\s+/gu, "")
+                    .toLocaleUpperCase("und");
+            }
+
+            // Small sha256 (UTF-8 in, hex out): fallback when crypto.subtle is missing (file://).
+            function sha256js(str) {
+                var b = unescape(encodeURIComponent(str)),
+                    n = b.length,
+                    w = [],
+                    i,
+                    j;
+                var K = [],
+                    H = [],
+                    p = 0,
+                    c = 2;
+                function f(x) {
+                    return ((x - Math.floor(x)) * 4294967296) | 0;
+                }
+                for (; p < 64; c++) {
+                    var pr = 1;
+                    for (i = 2; i * i <= c; i++)
+                        if (c % i == 0) {
+                            pr = 0;
+                            break;
+                        }
+                    if (pr) {
+                        if (p < 8) H[p] = f(Math.pow(c, 0.5));
+                        K[p++] = f(Math.pow(c, 1 / 3));
+                    }
+                }
+                for (i = 0; i < (((n + 8) >> 6) << 4) + 16; i++) w[i] = 0;
+                for (i = 0; i < n; i++)
+                    w[i >> 2] |= b.charCodeAt(i) << (24 - (i % 4) * 8);
+                w[n >> 2] |= 0x80 << (24 - (n % 4) * 8);
+                w[(((n + 8) >> 6) << 4) + 15] = n * 8;
+                for (j = 0; j < w.length; j += 16) {
+                    var x = w.slice(j, j + 16),
+                        a = H.slice(0, 8);
+                    for (i = 0; i < 64; i++) {
+                        if (i >= 16) {
+                            var s0 = x[i - 15],
+                                s1 = x[i - 2];
+                            x[i] =
+                                (x[i - 16] +
+                                    (((s0 >>> 7) | (s0 << 25)) ^
+                                        ((s0 >>> 18) | (s0 << 14)) ^
+                                        (s0 >>> 3)) +
+                                    x[i - 7] +
+                                    (((s1 >>> 17) | (s1 << 15)) ^
+                                        ((s1 >>> 19) | (s1 << 13)) ^
+                                        (s1 >>> 10))) |
+                                0;
+                        }
+                        var e = a[4],
+                            t1 =
+                                (a[7] +
+                                    (((e >>> 6) | (e << 26)) ^
+                                        ((e >>> 11) | (e << 21)) ^
+                                        ((e >>> 25) | (e << 7))) +
+                                    ((e & a[5]) ^ (~e & a[6])) +
+                                    K[i] +
+                                    x[i]) |
+                                0;
+                        var q = a[0],
+                            t2 =
+                                ((((q >>> 2) | (q << 30)) ^
+                                    ((q >>> 13) | (q << 19)) ^
+                                    ((q >>> 22) | (q << 10))) +
+                                    ((q & a[1]) ^ (q & a[2]) ^ (a[1] & a[2]))) |
+                                0;
+                        a = [
+                            (t1 + t2) | 0,
+                            a[0],
+                            a[1],
+                            a[2],
+                            (a[3] + t1) | 0,
+                            a[4],
+                            a[5],
+                            a[6],
+                        ];
+                    }
+                    for (i = 0; i < 8; i++) H[i] = (H[i] + a[i]) | 0;
+                }
+                return H.map(function (v) {
+                    return ("00000000" + (v >>> 0).toString(16)).slice(-8);
+                }).join("");
+            }
+            function sha256(s) {
+                try {
+                    if (window.crypto && crypto.subtle)
+                        return crypto.subtle
+                            .digest("SHA-256", new TextEncoder().encode(s))
+                            .then(function (d) {
+                                return Array.from(
+                                    new Uint8Array(d),
+                                    function (x) {
+                                        return ("0" + x.toString(16)).slice(-2);
+                                    },
+                                ).join("");
+                            });
+                } catch (e) {}
+                return Promise.resolve(sha256js(s));
+            }
+
+            function load() {
+                try {
+                    return JSON.parse(localStorage.getItem("ortoo26") || "{}");
+                } catch (e) {
+                    return {};
+                }
+            }
+            function save() {
+                try {
+                    localStorage.setItem("ortoo26", JSON.stringify(st));
+                } catch (e) {}
+            }
+            var st = load();
+            st.solved = st.solved || {};
+            st.hints = st.hints || {};
+
+            function el(t, c, x) {
+                var e = document.createElement(t);
+                if (c) e.className = c;
+                if (x != null) e.textContent = x;
+                return e;
+            }
+            function rich(p, s) {
+                s.split(/`/).forEach(function (t, i) {
+                    p.appendChild(
+                        i % 2 ? el("code", 0, t) : document.createTextNode(t),
+                    );
+                });
+            }
+
+            function field(sec, f) {
+                var key = sec + "." + f[0],
+                    row = el("div", "f"),
+                    lb = el("label", 0, f[1]),
+                    inp = el("input"),
+                    btn = el("button", 0, "Шалгах"),
+                    res = el("span", "r");
+                inp.id = key;
+                inp.autocomplete = "off";
+                inp.autocapitalize = "off";
+                inp.spellcheck = false;
+                lb.htmlFor = key;
+                function mark(ok) {
+                    res.textContent = ok ? "✓" : "✗";
+                    res.className = "r " + (ok ? "y" : "n");
+                    row.className = ok ? "f done" : "f";
+                }
+                function go() {
+                    var v = normalize(inp.value);
+                    if (sec === "bonus") v = v.replace(/[^\p{L}]/gu, "");
+                    if (!v) {
+                        res.textContent = "";
+                        return;
+                    }
+                    sha256(v).then(function (h) {
+                        var ok = h === HASH[sec][f[0]];
+                        mark(ok);
+                        if (ok) {
+                            st.solved[key] = inp.value;
+                            save();
+                        }
+                    });
+                }
+                btn.onclick = go;
+                inp.onkeydown = function (e) {
+                    if (e.key === "Enter") go();
+                };
+                if (st.solved[key]) {
+                    inp.value = st.solved[key];
+                    mark(true);
+                }
+                row.append(lb, inp, btn, res);
+                return row;
+            }
+
+            function hints(sec) {
+                var box = el("div", "h"),
+                    list = el("div"),
+                    btn = el("button", 0, "Дараагийн сэжүүр"),
+                    H = HINTS[sec];
+                function draw() {
+                    list.textContent = "";
+                    for (var i = 0; i < (st.hints[sec] || 0); i++) {
+                        var p = el("p");
+                        p.append(el("b", 0, "Сэжүүр " + (i + 1) + ": "));
+                        rich(p, H[i]);
+                        list.appendChild(p);
+                    }
+                    btn.hidden = (st.hints[sec] || 0) >= H.length;
+                }
+                btn.onclick = function () {
+                    st.hints[sec] = (st.hints[sec] || 0) + 1;
+                    save();
+                    draw();
+                };
+                draw();
+                box.append(list, btn);
+                return box;
+            }
+
+            var app = document.getElementById("app");
+            SECS.forEach(function (s) {
+                var box = el("section"),
+                    sec = s[0];
+                box.appendChild(el("h2", 0, s[1]));
+                s[2].forEach(function (f) {
+                    box.appendChild(field(sec, f));
+                });
+                if (s[3]) {
+                    var a = el("a", "b", s[4]);
+                    a.href = s[3];
+                    box.appendChild(a);
+                }
+                if (HINTS[sec]) box.appendChild(hints(sec));
+                app.appendChild(box);
+            });
+        </script>
+    </body>
+</html>

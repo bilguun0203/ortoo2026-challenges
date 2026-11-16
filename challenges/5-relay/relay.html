@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="mn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Өртөөний суваг</title>
+<style>
+:root{--bg:#fff;--fg:#111;--card:#f4f4f5;--mut:#71717a;--bad:#dc2626;--ok:#16a34a;--sig:#2563eb;--bd:#d4d4d8}
+@media(prefers-color-scheme:dark){:root{--bg:#111318;--fg:#eee;--card:#1c1f27;--mut:#9ca3af;--bad:#f87171;--ok:#4ade80;--sig:#60a5fa;--bd:#3f4350}}
+body{margin:0;padding:16px;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,sans-serif}
+main{max-width:900px;margin:auto;display:grid;gap:12px}
+h1{font-size:1.3rem;margin:0}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.bar button{height:36px;min-width:36px;padding:0 10px;border:1.5px solid var(--bd);border-radius:6px;font:700 14px ui-monospace,monospace;cursor:pointer;background:var(--card);color:var(--fg)}
+.bar button.on{border-color:var(--fg);box-shadow:0 0 0 2px var(--fg)}
+.bar .c{color:#000;border-color:transparent}
+#reset{margin-left:auto;border:0!important;background:none!important;text-decoration:underline;font:inherit!important;color:var(--mut)!important}
+svg{width:100%;height:auto;border:1px solid var(--bd);border-radius:8px;user-select:none;-webkit-user-select:none;touch-action:manipulation}
+g.s{cursor:pointer}
+.m{font:14px ui-monospace,monospace;margin:0}
+.m b.bad{color:var(--bad)}.m b.ok{color:var(--ok)}
+#frag{text-align:center;font:700 1.6rem ui-monospace,monospace;letter-spacing:.2em;color:var(--ok);margin:0}
+table{border-collapse:collapse;font:14px ui-monospace,monospace;display:block;overflow-x:auto}
+td,th{border:1px solid var(--bd);padding:2px 8px;text-align:center}
+</style>
+</head>
+<body>
+<main>
+<h1>Өртөөний суваг: 30 өртөөнд 3 суваг оноо</h1>
+<div class="bar" id="bar"></div>
+<svg id="map" role="img" aria-label="Өртөөний граф"></svg>
+<p class="m" id="stat" aria-live="polite"></p>
+<p class="m" id="score"></p>
+<p id="frag" hidden></p>
+<table id="tbl"></table>
+</main>
+<script>
+const G={"k":3,"size":[1100,900],"pos":{"A1":[387,448],"A2":[938,200],"C5":[953,608],"D0":[109,316],"D6":[520,840],"D7":[821,339],"G4":[67,584],"H1":[666,763],"H8":[603,421],"I3":[60,724],"I4":[781,624],"L3":[272,504],"L4":[532,310],"N3":[857,60],"O1":[150,179],"P6":[315,327],"S8":[304,210],"T2":[889,779],"U1":[532,98],"U3":[426,641],"V1":[295,608],"W1":[310,70],"W2":[1040,337],"W4":[685,289],"X0":[530,219],"X5":[609,540],"X9":[60,435],"Y6":[673,126],"Z1":[353,769],"Z5":[782,517]},"edges":[["I3","A1"],["C5","Z5"],["A1","D0"],["Y6","O1"],["V1","C5"],["I4","Y6"],["X0","A2"],["D7","O1"],["W2","D7"],["Z1","V1"],["H1","Z1"],["X5","V1"],["T2","I4"],["U3","D7"],["D0","L3"],["Z1","I4"],["N3","X0"],["Z1","I3"],["L3","S8"],["V1","X9"],["O1","A1"],["C5","H8"],["T2","D7"],["W4","I4"],["P6","N3"],["U3","D6"],["C5","T2"],["H1","G4"],["D6","X5"],["W4","X9"],["S8","X0"],["Z1","X9"],["X0","P6"],["H8","X9"],["A2","Z5"],["X9","G4"],["G4","L3"],["U1","L4"],["P6","I3"],["Z1","T2"],["D0","Z1"],["Z5","L3"],["G4","D0"],["X5","I4"],["C5","H1"],["D6","I3"],["C5","X5"],["V1","L4"],["Z5","D6"],["P6","W1"],["N3","A2"],["H1","U3"],["L4","C5"],["H8","U1"],["X0","A1"],["A2","H8"],["L4","W1"],["D0","Y6"],["V1","O1"],["D0","O1"],["L4","P6"],["I4","H1"],["Z1","Z5"],["P6","V1"],["Y6","N3"],["X9","I3"],["U1","X0"],["W2","C5"],["U1","W2"],["T2","Z5"],["S8","W1"],["I4","D6"],["G4","S8"],["H1","T2"],["L4","I4"],["U3","P6"],["L3","I3"],["S8","L4"],["A2","D7"],["D6","A1"],["W2","W4"],["P6","U1"],["G4","U3"],["I4","Z5"],["X5","X0"],["H8","Y6"],["U1","D0"],["Y6","U1"],["S8","H8"],["H1","L3"],["X5","H8"],["O1","S8"],["Y6","W1"],["U3","X0"],["N3","W2"],["U3","A1"],["W4","S8"],["N3","L4"],["W2","Y6"],["A2","W4"],["W1","Z5"],["G4","I3"],["W2","H1"],["D7","S8"],["W1","X9"],["H8","T2"],["D7","N3"],["D6","V1"],["D7","W4"],["X0","L3"],["W2","Z5"],["O1","W1"],["T2","D6"],["W4","N3"],["A2","Y6"],["X9","O1"],["U1","W1"],["G4","H8"],["U3","I3"],["X5","P6"],["D0","L4"],["X5","U1"],["A1","A2"],["W4","A1"],["L3","W4"]]};
+const COL=["#e69f00","#56b4e9","#2fc79a"],KEY="relay-colouring",BEST="relay-best",NS="http://www.w3.org/2000/svg";
+const STEPS=[15,12,11,10,9,8,7,6,5,4,3,2],MIN=11,FLOOR=1;
+// pathReveal (validate.ts): cp*2 >= points + min(points, floor*100), in centipoints: 1500+100 -> cp >= 800 = 8 points = steps[5] = 16 clashes
+const REVEAL=16;
+const pts=c=>c<MIN?STEPS[0]:STEPS[c-MIN]??FLOOR;
+const names=Object.keys(G.pos).sort(),$=id=>document.getElementById(id);
+let ch={},brush=1,hot=null,best=null;
+try{const o=JSON.parse(localStorage.getItem(KEY)||"{}");for(const n in o)if(G.pos[n]&&o[n]>=1&&o[n]<=G.k)ch[n]=o[n]}catch{}
+try{const b=+localStorage.getItem(BEST);if(b>0)best=b}catch{}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(ch))}catch{}};
+const el=(t,a,p)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);p&&p.append(e);return e};
+const bar=$("bar");
+const tool=(txt,fn,bg)=>{const b=document.createElement("button");b.type="button";b.textContent=txt;if(bg){b.style.background=bg;b.className="c"}b.onclick=fn;bar.append(b);return b};
+const brushes=[...COL.map((c,i)=>tool(i+1,()=>pick(i+1),c)),tool("Арилгах",()=>pick(0))];
+const pick=i=>{brush=i;brushes.forEach((b,j)=>b.classList.toggle("on",j===(i?i-1:G.k)))};
+const rb=tool("Бүгдийг арилгах",()=>{ch={};save();draw()});rb.id="reset";
+const svg=$("map");svg.setAttribute("viewBox","0 0 "+G.size[0]+" "+G.size[1]);
+svg.onmouseleave=()=>{hot=null;draw()};
+addEventListener("keydown",e=>{if(!e.ctrlKey&&!e.metaKey&&!e.altKey&&/^\d$/.test(e.key)&&+e.key<=G.k)pick(+e.key)});
+function draw(){
+  const bad=(a,b)=>ch[a]&&ch[a]===ch[b],near=new Set();
+  for(const[a,b]of G.edges){if(a===hot)near.add(b);if(b===hot)near.add(a)}
+  svg.textContent="";
+  const mine=e=>e[0]===hot||e[1]===hot;
+  for(const e of[...G.edges].sort((x,y)=>mine(x)-mine(y))){
+    const[a,b]=e,m=mine(e),x=bad(a,b);
+    el("line",{x1:G.pos[a][0],y1:G.pos[a][1],x2:G.pos[b][0],y2:G.pos[b][1],stroke:x?"var(--bad)":m?"var(--sig)":"var(--mut)","stroke-width":x?5:m?3.5:1.5,opacity:hot&&!m?(x?.5:.12):x||m?1:.55},svg);
+  }
+  for(const n of names){
+    const[x,y]=G.pos[n],c=ch[n],g=el("g",{class:"s",opacity:hot&&hot!==n&&!near.has(n)?.3:1},svg);
+    g.onclick=()=>{if(brush)ch[n]=brush;else delete ch[n];save();draw()};
+    g.onmouseenter=()=>{if(hot!==n){hot=n;draw()}};
+    el("circle",{cx:x,cy:y,r:28,fill:c?COL[c-1]:"var(--card)",stroke:n===hot?"var(--sig)":"var(--fg)","stroke-width":n===hot?4:2},g);
+    const t=el("text",{x,y:c?y-9:y,"text-anchor":"middle","dominant-baseline":"central","font-size":c?16:19,"font-weight":700,"font-family":"ui-monospace,monospace",fill:c?"#000":"var(--fg)"},g);t.textContent=n;
+    if(c){const u=el("text",{x,y:y+10,"text-anchor":"middle","dominant-baseline":"central","font-size":20,"font-weight":800,"font-family":"ui-monospace,monospace",fill:"#000"},g);u.textContent=c}
+  }
+  const cl=G.edges.filter(([a,b])=>bad(a,b)).length,left=names.filter(n=>!ch[n]).length,full=!left;
+  $("stat").innerHTML="Зөрчил: <b class=\""+(cl?"bad":"ok")+"\">"+cl+"</b> · Будаагүй өртөө: <b>"+left+"</b>"+(hot?" · "+hot+" хөршүүд: "+[...near].sort().map(n=>n+(ch[n]?"("+ch[n]+")":"")).join(", "):"");
+  if(full&&(!best||cl<best)){best=cl;try{localStorage.setItem(BEST,best)}catch{}}
+  $("score").innerHTML=(full?"Оноо: <b>"+pts(cl)+"</b> · ":"")+(best?"Хамгийн сайн: <b>"+best+"</b> зөрчил ("+pts(best)+" оноо)":"");
+  $("frag").hidden=!(full&&cl<=REVEAL);$("frag").textContent="[PATH]";
+  rb.disabled=!names.some(n=>ch[n]);
+}
+$("tbl").innerHTML="<tr><th>Зөрчил</th>"+STEPS.map((_,i)=>"<td>"+(MIN+i)+"</td>").join("")+"<td>"+(MIN+STEPS.length)+"+</td></tr><tr><th>Оноо</th>"+STEPS.map(s=>"<td>"+s+"</td>").join("")+"<td>"+FLOOR+"</td></tr>";
+pick(1);draw();
+</script>
+</body>
+</html>

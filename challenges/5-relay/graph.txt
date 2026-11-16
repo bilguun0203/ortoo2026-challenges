@@ -1,0 +1,30 @@
+A1: A2, D0, D6, I3, O1, U3, W4, X0
+A2: A1, D7, H8, N3, W4, X0, Y6, Z5
+C5: H1, H8, L4, T2, V1, W2, X5, Z5
+D0: A1, G4, L3, L4, O1, U1, Y6, Z1
+D6: A1, I3, I4, T2, U3, V1, X5, Z5
+D7: A2, N3, O1, S8, T2, U3, W2, W4
+G4: D0, H1, H8, I3, L3, S8, U3, X9
+H1: C5, G4, I4, L3, T2, U3, W2, Z1
+H8: A2, C5, G4, S8, T2, U1, X5, X9, Y6
+I3: A1, D6, G4, L3, P6, U3, X9, Z1
+I4: D6, H1, L4, T2, W4, X5, Y6, Z1, Z5
+L3: D0, G4, H1, I3, S8, W4, X0, Z5
+L4: C5, D0, I4, N3, P6, S8, U1, V1, W1
+N3: A2, D7, L4, P6, W2, W4, X0, Y6
+O1: A1, D0, D7, S8, V1, W1, X9, Y6
+P6: I3, L4, N3, U1, U3, V1, W1, X0, X5
+S8: D7, G4, H8, L3, L4, O1, W1, W4, X0
+T2: C5, D6, D7, H1, H8, I4, Z1, Z5
+U1: D0, H8, L4, P6, W1, W2, X0, X5, Y6
+U3: A1, D6, D7, G4, H1, I3, P6, X0
+V1: C5, D6, L4, O1, P6, X5, X9, Z1
+W1: L4, O1, P6, S8, U1, X9, Y6, Z5
+W2: C5, D7, H1, N3, U1, W4, Y6, Z5
+W4: A1, A2, D7, I4, L3, N3, S8, W2, X9
+X0: A1, A2, L3, N3, P6, S8, U1, U3, X5
+X5: C5, D6, H8, I4, P6, U1, V1, X0
+X9: G4, H8, I3, O1, V1, W1, W4, Z1
+Y6: A2, D0, H8, I4, N3, O1, U1, W1, W2
+Z1: D0, H1, I3, I4, T2, V1, X9, Z5
+Z5: A2, C5, D6, I4, L3, T2, W1, W2, Z1
